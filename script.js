@@ -75,7 +75,41 @@
 
 // secondItem.style.color = 'cyan'
 
-// SELECTOR QUERYSELECTORALL 
-let titles = document.querySelectorAll('.title')
+// SELECTOR QUERYSELECTORALL //
+// let titles = document.querySelectorAll('.title')
+// titles[0].textContent = 'Hello';
 
-console.log(titles)
+// let odd = document.querySelectorAll('li:nth-child(odd)');
+// let even = document.querySelectorAll('li:nth-child(even)');
+
+// for(i = 0; i < odd.length; i++) {
+//     // odd[i] = odd on its current iteration
+//     odd[i].style.backgroundColor = '#f4f4f4';
+//     even[i].style.backgroundColor = '#ccc';
+// }
+
+// QUERYING PARENTS AND SIBLINGS -- TRAVERSING THE DOM //
+let itemList = document.querySelector('#items');
+console.log(itemList)
+// parentNode
+// console.log(itemList.parentNode)
+// itemList.parentNode.style.backgroundColor = '#f4f4f4';
+// console.log(itemList.parentNode.parentNode)
+
+// parentElement
+// console.log(itemList.parentElement)
+// itemList.parentElement.style.backgroundColor = '#f4f4f4';
+// console.log(itemList.parentElement.parentElement)
+
+// childNodes
+// console.log(itemList.childNodes) //not advisable, considers linebreaks as text
+// console.log(itemList.children)
+// itemList.children[1].style.backgroundColor = 'orange';
+
+// firstChild
+console.log(itemList.firstChild);
+console.log(itemList.lastChild);  // will also include whitespace and line break as text
+
+// firstElementChild // lastElementChild
+console.log(itemList.firstElementChild);
+console.log(itemList.lastElementChild)
