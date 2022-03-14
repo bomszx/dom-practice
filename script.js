@@ -21,7 +21,7 @@
 // headerTitle.textContent = 'test'
 // headerTitle.innerText = 'Goodbye'
 // ** innerText pays attention to the style
-// headerTitle.innerHTML = '<h6>Hello Garci</h6>';
+// headerTitle.innerHTML = '<h1>Hello Garci</h1>';
 // header.style.borderBottom = 'solid black 3px';
 
 // SELECTORS GETLEMENTSBYCLASSNAME //
@@ -32,7 +32,7 @@
 // items[1].style.fontWeight = ' bold'
 // items[1].style.backgroundColor = 'yellow';
 
-// Gives error because the computer is stupid and you need to loop through the nodelist to apply the style
+// Gives error because the computer is stupid and you need to loop through the nodelist to apply the style to each and everyone
 // items.style.backgroundColor = '#f4f4f4';
 
 // for(i = 0; i < items.length; i++) {
@@ -63,8 +63,12 @@
 // let submit = document.querySelector('input[type="submit"]')
 // submit.value = "Send";
 
-// let item = document.querySelector('.list-group-item')
-// item.style.color = 'red'
+// let items = document.querySelectorAll('.list-group-item');
+// console.log(items)
+
+// for(i = 0; i < items.length; i++) {
+//     items[i].style.color = 'green';
+// }
 
 // Note how we use last child and nth-child(2) (selecting the 2nd child)
 // let lastItem = document.querySelector('.list-group-item:last-child')
@@ -89,11 +93,12 @@
 // }
 
 // QUERYING PARENTS AND SIBLINGS -- TRAVERSING THE DOM //
-let itemList = document.querySelector('#items');
-console.log(itemList)
+// let itemList = document.querySelector('#items');
+// console.log(itemList)
 // parentNode
 // console.log(itemList.parentNode)
 // itemList.parentNode.style.backgroundColor = '#f4f4f4';
+// console.log(itemList.parentNode.parentNode)
 // console.log(itemList.parentNode.parentNode)
 
 // parentElement
@@ -107,9 +112,115 @@ console.log(itemList)
 // itemList.children[1].style.backgroundColor = 'orange';
 
 // firstChild
-console.log(itemList.firstChild);
-console.log(itemList.lastChild);  // will also include whitespace and line break as text
+// console.log(itemList.firstChild);
+// console.log(itemList.lastChild);  // will also include whitespace and line break as text
 
 // firstElementChild // lastElementChild
-console.log(itemList.firstElementChild);
-console.log(itemList.lastElementChild)
+// console.log(itemList.firstElementChild);
+// console.log(itemList.lastElementChild)
+
+// itemList.lastElementChild.textContent = 'I\'m here';
+
+// nextSibling
+// console.log(itemList.nextSibling);
+// console.log(itemList.nextElementSibling);
+
+// CREATING DOM ELEMENTS USING DOM MANIPULATION THROUGH JAVASCRIPT //
+// createElement
+
+// create a div
+// let newDiv = document.createElement('div');
+
+// add class
+// newDiv.className = 'tanga';
+
+// add ID
+// newDiv.id = 'tanga-tanga';
+
+// add attr
+// newDiv.setAttribute('title', 'Hello Div');
+
+// create text node - to add content to our div
+// let newDivText = document.createTextNode('Hello World')
+
+// after creating the node/element we need to append it
+// newDiv.appendChild(newDivText)
+
+// let container = document.querySelector('header .container');
+// let h1 = document.querySelector('header h1')
+
+// newDiv.style.fontSize = '40px';
+// container.insertBefore(newDiv, h1)
+
+// console.log(newDiv);
+
+// EVENTS click events //
+
+// let button = document.getElementById('button').addEventListener('click', buttonClick);
+
+// function buttonClick(e) {
+    // document.getElementById('header-title').textContent = 'Changed';
+    // document.querySelector('#main').style.backgroundColor =  '#f4f4f4';
+    // console.log(e);
+
+    // console.log(e)
+    // console.log(e.target);
+    // console.log(e.target.id);
+    // console.log(e.target.className);
+    // console.log(e.target.classList)
+
+    // let output = document.getElementById('output');
+    // output.innerHTML = '<h3>'+e.target.id+'</h3>';   
+    
+
+    //MOUSE LOCATION
+    // console.log(e.type);
+    // console.log(e.clientX);
+    // console.log(e.clientY);
+
+    // console.log(e.offsetX);
+    // console.log(e.offsetY);
+
+
+    //IF YOU'RE HOLDING DOWN THESE KEYS
+    // console.log(e.altKey);
+    // console.log(e.shiftKey);
+    // console.log(e.ctrlKey);
+
+// }
+
+function runEvent(e) {
+    console.log('EVENT TYPE:' + ' ' +e.type);
+    console.log(e)
+    //tracking mouse movement
+    // output.innerHTML = '<h3>'+e.offsetX+'</h3>' + '<h3>'+e.offsetY+'</h3>'
+
+    // document.body.style.backgroundColor = "rgb("+e.offsetX+", "+e.offsetY+", 40)";
+
+    //key-log
+    console.log(e.target.value)
+}
+
+// let button = document.getElementById('button');
+// button.addEventListener('click', runEvent);
+// button.addEventListener('dblclick', runEvent);
+// button.addEventListener('mousedown', runEvent);
+// button.addEventListener('mouseup', runEvent);
+// button.addEventListener('mousedown', runEvent);
+
+// let box = document.getElementById('box');
+// box.addEventListener('mouseenter', runEvent);
+// box.addEventListener('mouseleave', runEvent);
+// box.addEventListener('mouseover', runEvent); // for any inner elements
+// box.addEventListener('mouseout', runEvent);
+// box.addEventListener('mousemove', runEvent);
+
+// EVENTS keyboard events  //
+
+let itemInput = document.querySelector('input[type=text]');
+let form = document.querySelector('form')
+
+console.log(itemInput);
+console.log(form);
+
+itemInput.addEventListener('keydown', runEvent);
