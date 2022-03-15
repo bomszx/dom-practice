@@ -189,18 +189,24 @@
 
 // }
 
-function runEvent(e) {
-    console.log('EVENT TYPE:' + ' ' +e.type);
-    console.log(e)
+// function runEvent(e) {
+//     e.preventDefault();
+//     console.log('EVENT TYPE:' + ' ' +e.type);
+//     console.log(e.target.value);
+
+
     //tracking mouse movement
     // output.innerHTML = '<h3>'+e.offsetX+'</h3>' + '<h3>'+e.offsetY+'</h3>'
 
     // document.body.style.backgroundColor = "rgb("+e.offsetX+", "+e.offsetY+", 40)";
 
     //key-log
-    console.log(e.target.value)
-}
+    // console.log(e.target.value)
+    //outputing on the html
+    // document.getElementById('output').innerHTML = '<h2>' + e.target.value + '</h2>';
 
+    // document.body.style.display = 'none';
+// }
 // let button = document.getElementById('button');
 // button.addEventListener('click', runEvent);
 // button.addEventListener('dblclick', runEvent);
@@ -217,10 +223,94 @@ function runEvent(e) {
 
 // EVENTS keyboard events  //
 
-let itemInput = document.querySelector('input[type=text]');
-let form = document.querySelector('form')
+// let itemInput = document.querySelector('input[type=text]');
+// let form = document.querySelector('form');
+// let select = document.querySelector('select');
 
-console.log(itemInput);
-console.log(form);
+// itemInput.addEventListener('keydown', runEvent);
+// itemInput.addEventListener('keyup', runEvent);
+// itemInput.addEventListener('keypress', runEvent);
 
-itemInput.addEventListener('keydown', runEvent);
+//focus and blur, active and inactive 
+// itemInput.addEventListener('focus', runEvent);
+// itemInput.addEventListener('blur', runEvent);
+
+//cut and paste
+// itemInput.addEventListener('cut', runEvent);
+// itemInput.addEventListener('paste', runEvent);
+
+// itemInput.addEventListener('input', runEvent);
+// select.addEventListener('change', runEvent);
+// form.addEventListener('submit', runEvent);
+
+let form = document.getElementById('addForm');
+let itemList = document.getElementById('items');
+let filter = document.getElementById('filter');
+
+// Form submit event
+form.addEventListener('submit', addItem);
+
+// Remove item
+itemList.addEventListener('click', removeItem);
+
+// Filter item
+filter.addEventListener('keyup', filterItems)
+
+// Add item function
+function addItem(e) {
+    e.preventDefault();
+
+    //Get input value
+    let newItem = document.getElementById('item').value;
+
+    //Create new li element
+    let li = document.createElement('li');
+    
+    //Add class name so it will follow the CSS ruling in this case bootstrap
+    li.className = 'list-group-item';
+    // li.id = 'tange testing lang to';
+    
+    //Add text node with input value
+    li.appendChild(document.createTextNode(newItem));
+
+    //Create del button element
+    let delBtn = document.createElement('btn');
+
+    delBtn.className = 'btn-danger btn-sm float-right delete'
+
+    delBtn.appendChild(document.createTextNode('X'));
+
+    //Append button to li
+    li.appendChild(delBtn);
+
+    //Append li to list
+    itemList.appendChild(li);
+}
+
+//Function remove items
+function removeItem(e) {
+    if(e.target.classList.contains('delete')) {
+        if(confirm('Are you sure?')) {
+            console.log(e.target.parentElement.parentElement);
+
+        }
+    }
+}
+
+
+//Function filter items
+function filterItems(e) {
+    //conver text to lowercase
+    let text = e.target.value.toLowerCase();
+    //get lis
+    let items = itemList.getElementsByTagName('li');
+    //convert to an array
+    Array.from(items).forEach(function(item) {
+        let itemName = item.firstChild.textContent;
+        if(itemName.toLowerCase().indexOf(text) != -1) {
+            item.style.display = 'block';
+        } else {
+            item.style.display = 'none';
+        }
+    })
+}
